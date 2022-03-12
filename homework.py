@@ -1,5 +1,9 @@
 from dataclasses import asdict, dataclass
-from typing import Dict
+from typing import Dict, Type
+
+
+class MyCustomError(Exception):
+    pass
 
 
 @dataclass
@@ -148,11 +152,13 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-    select_training: Dict[str, Training] = {
+    select_training: Dict[str, Type[Training]] = {
         'SWM': Swimming,
         'RUN': Running,
         'WLK': SportsWalking,
     }
+    if workout_type not in select_training:
+        raise MyCustomError('Это Вам к другому тренеру, ту такого нет!!!!')
     return select_training[workout_type](*data)
 
 
