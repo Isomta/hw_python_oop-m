@@ -27,8 +27,8 @@ class Training:
     """Базовый класс тренировки."""
 
     LEN_STEP: float = 0.65
-    M_IN_KM: int = 1000
-    MIN: int = 60
+    M_IN_KM: float = 1000
+    MIN: float = 60
 
     def __init__(
         self,
@@ -50,7 +50,7 @@ class Training:
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        raise NotImplementedError('Переопределите метод get_spent_calories')
+        raise NotImplementedError(f'Переопределите метод get_spent_calories в классе - {self.__class__.__name__}')
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
